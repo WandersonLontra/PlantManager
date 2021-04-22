@@ -38,7 +38,7 @@ export function UserIdentification() {
     };
 
     function handleSubmit() {
-        navigation.navigate('Confirmation');
+        isFilled ? navigation.navigate('Confirmation') : '';
     };
 
     return (
