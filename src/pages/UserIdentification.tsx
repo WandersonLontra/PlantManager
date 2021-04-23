@@ -8,12 +8,15 @@ import {
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Button } from '../components/Button'
 import { useNavigation } from '@react-navigation/core';
+import asyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function UserIdentification() {
     const [isFocused, setIsFocused] = useState(false);
@@ -37,8 +40,18 @@ export function UserIdentification() {
         setName(value)
     };
 
-    function handleSubmit() {
-        isFilled ? navigation.navigate('Confirmation') : '';
+    async function handleSubmit() {
+        if (!name)
+            return Alert.alert('Me diz seu nome, vai 😢');
+
+        try {
+            await AsyncStorage.setItem('@plantmanager:user', name);
+
+            navigation.navigate('Confirmation')
+        } catch {
+            Alert.alert('Não foi possível salvar seu nome 🤔')
+        }
+
     };
 
     return (
