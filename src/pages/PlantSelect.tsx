@@ -17,7 +17,6 @@ import { Load } from '../components/Load';
 
 import { useNavigation } from '@react-navigation/core';
 import api from '../services/api';
-import { Inter_500Medium } from '@expo-google-fonts/inter';
 import { PlantProps } from '../libs/storage';
 
 /*INTERFACES TO STATE*/
